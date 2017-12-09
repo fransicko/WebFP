@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS orders, customers, products;
 
 CREATE TABLE customers (
-	customerID int NOT NULL,
+	customerID serial NOT NULL,
 	firstName varchar(255) NOT NULL,
 	lastName varchar(255) NOT NULL,
 	email varchar(255) NOT NULL,
@@ -13,7 +13,6 @@ CREATE TABLE products (
 	name varchar(255) NOT NULL,
 	price int NOT NULL,
 	image text NOT NULL,
-	game varchar(255) NOT NULL,
 	stock int,
 	PRIMARY KEY (productID)
 );
@@ -33,21 +32,36 @@ CREATE TABLE orders (
 	PRIMARY KEY (orderID)
 );
 
+/*	Hash table for users	*/
+CREATE TABLE hash {
+	customerID int NOT NULL,
+	salt carchar(255) NOT NULL,
+	hash varchar(255) NOT NULL,
+	FOREIGN KEY (customerID) REFERENCES customers(customerID)
+};
+
 -- Insert items into products.  'Image' will store the value for the <option> within the html.
 -- This is because selection of images is defined in a .js which uses the value in <option>
 
 -- The Chicago Typewriter from Resident Evil 4
 INSERT INTO products
-VALUES (1, 'Chicago Typewriter', 1000000, 'typewriter', 're4', 10);
+VALUES ('Chicago Typewriter', 1000000, 'typewriter', 10);
 
 -- The Apple Gel from Tales of Symphonia
 INSERT INTO products
-VALUES (2, 'Apple Gel', 225, 'apple', 'tos', 99);
+VALUES ('Apple Gel', 225, 'apple', 99);
 
 -- The Phoenix Down from Final Fantasy
 INSERT INTO products
-VALUES (3, 'Phoenix Down', 515, 'phoenix', 'ff', 99);
+VALUES ('Phoenix Down', 515, 'phoenix', 99);
 
 -- An Iron Helmet from the The Elder Scrolls series
 INSERT INTO products
-VALUES (4, 'Iron Helmet', 122, 'helmet', 'tes', 15);
+VALUES ('Iron Helmet', 122, 'helmet', 15);
+
+/*	Insert a test customer	*/
+INSERT INTO customers
+VALUES ('test', 'test', 'test@gmail.com');
+
+INSERT INTO hash
+VALUES (1, 'salt', '$2y$10$ByQRt0B1FDZ53W9nRUQOUOWyMvguLnbfcreCdYUSozzWlvM5U5lb.');
