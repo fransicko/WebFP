@@ -9,7 +9,7 @@ CREATE TABLE customers (
 );
 
 CREATE TABLE products (
-	productID int NOT NULL,
+	productID serial NOT NULL,
 	name varchar(255) NOT NULL,
 	price int NOT NULL,
 	image text NOT NULL,
@@ -37,7 +37,8 @@ CREATE TABLE hash {
 	customerID int NOT NULL,
 	salt varchar(255) NOT NULL,
 	hash varchar(255) NOT NULL,
-	FOREIGN KEY (customerID) REFERENCES customers(customerID)
+	FOREIGN KEY (customerID) REFERENCES customers(customerID),
+	PRIMARY KEY (customerID)
 };
 
 -- Insert items into products.  'Image' will store the value for the <option> within the html.
