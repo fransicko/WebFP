@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS orders, customers, products;
+DROP TABLE IF EXISTS hash, orders, customers, products;
 
 CREATE TABLE customers (
 	customerID serial,
@@ -44,24 +44,24 @@ CREATE TABLE hash (
 -- This is because selection of images is defined in a .js which uses the value in <option>
 
 -- The Chicago Typewriter from Resident Evil 4
-INSERT INTO products
+INSERT INTO products(name, price, image, stock)
 VALUES ('Chicago Typewriter', 1000000, 'typewriter', 10);
 
 -- The Apple Gel from Tales of Symphonia
-INSERT INTO products
+INSERT INTO products(name, price, image, stock)
 VALUES ('Apple Gel', 225, 'apple', 99);
 
 -- The Phoenix Down from Final Fantasy
-INSERT INTO products
+INSERT INTO products(name, price, image, stock)
 VALUES ('Phoenix Down', 515, 'phoenix', 99);
 
 -- An Iron Helmet from the The Elder Scrolls series
-INSERT INTO products
+INSERT INTO products(name, price, image, stock)
 VALUES ('Iron Helmet', 122, 'helmet', 15);
 
 /*	Insert a test customer	*/
-INSERT INTO customers
+INSERT INTO customers(firstName, lastName, email)
 VALUES ('test', 'test', 'test@gmail.com');
 
-INSERT INTO hash
+INSERT INTO hash(customerID, salt, hash)
 VALUES (1, 'salt', '$2y$10$ByQRt0B1FDZ53W9nRUQOUOWyMvguLnbfcreCdYUSozzWlvM5U5lb.');
