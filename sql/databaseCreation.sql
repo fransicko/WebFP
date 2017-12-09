@@ -35,7 +35,7 @@ CREATE TABLE orders (
 /*	Hash table for users	*/
 CREATE TABLE hash {
 	customerID int NOT NULL,
-	salt carchar(255) NOT NULL,
+	salt varchar(255) NOT NULL,
 	hash varchar(255) NOT NULL,
 	FOREIGN KEY (customerID) REFERENCES customers(customerID)
 };
