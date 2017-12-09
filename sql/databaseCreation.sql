@@ -33,13 +33,13 @@ CREATE TABLE orders (
 );
 
 /*	Hash table for users	*/
-CREATE TABLE hash {
+CREATE TABLE hash (
 	customerID int NOT NULL,
 	salt varchar(255) NOT NULL,
 	hash varchar(255) NOT NULL,
 	FOREIGN KEY (customerID) REFERENCES customers(customerID),
 	PRIMARY KEY (customerID)
-};
+);
 
 -- Insert items into products.  'Image' will store the value for the <option> within the html.
 -- This is because selection of images is defined in a .js which uses the value in <option>
