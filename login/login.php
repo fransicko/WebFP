@@ -12,7 +12,15 @@
 	<body>
 		
 		<?php
-			$user = 
+			$server = "localhost";
+			$user = "mvillafu";
+			$pass = "CQGQOMAS";
+			$db = "f17_mvillafu";
+			
+			$conn = new mysqli($server, $user, $pass, $db);
+			if ($conn->connect_error) {
+				die("Connection failed: " . $conn->connect_error);
+			}
 		?>
 		
 		
