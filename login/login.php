@@ -11,6 +11,11 @@
 	</head>
 	<body>
 		
+		<?php
+			$user = 
+		?>
+		
+		
 		<!-- Really simple log in for now -->
 		<fieldset class="login">
 			<legend>User Credentials</legend>

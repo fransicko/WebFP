@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS orders, customers, products;
 
 CREATE TABLE customers (
-	customerID serial NOT NULL,
+	customerID serial,
 	firstName varchar(255) NOT NULL,
 	lastName varchar(255) NOT NULL,
 	email varchar(255) NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE customers (
 );
 
 CREATE TABLE products (
-	productID serial NOT NULL,
+	productID serial,
 	name varchar(255) NOT NULL,
 	price int NOT NULL,
 	image text NOT NULL,
@@ -19,8 +19,8 @@ CREATE TABLE products (
 
 CREATE TABLE orders (
 	orderID int NOT NULL,
-	productID int NOT NULL,
-	customerID int NOT NULL,
+	productID BIGINT UNSIGNED NOT NULL,
+	customerID BIGINT UNSIGNED NOT NULL,
 	quantity int NOT NULL,
 	tax float NOT NULL,
 	donation float NOT NULL,
@@ -33,13 +33,12 @@ CREATE TABLE orders (
 );
 
 /*	Hash table for users	*/
-CREATE TABLE hash {
-	customerID int NOT NULL,
+CREATE TABLE hash (
+	customerID BIGINT UNSIGNED NOT NULL,
 	salt varchar(255) NOT NULL,
 	hash varchar(255) NOT NULL,
-	FOREIGN KEY (customerID) REFERENCES customers(customerID),
-	PRIMARY KEY (customerID)
-};
+	FOREIGN KEY (customerID) REFERENCES customers(customerID)
+);
 
 -- Insert items into products.  'Image' will store the value for the <option> within the html.
 -- This is because selection of images is defined in a .js which uses the value in <option>
