@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS orders, hash, customers, products;
 
 CREATE TABLE customers (
-	customerID int AUTO_INCREMENT NOT NULL,
+	customerID serial,
 	firstName varchar(255) NOT NULL,
 	lastName varchar(255) NOT NULL,
 	email varchar(255) NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE customers (
 );
 
 CREATE TABLE products (
-	productID int AUTO_INCREMENT NOT NULL,
+	productID serial,
 	name varchar(255) NOT NULL,
 	price int NOT NULL,
 	image text NOT NULL,
@@ -19,26 +19,25 @@ CREATE TABLE products (
 
 CREATE TABLE orders (
 	orderID int NOT NULL,
-	productsID int NOT NULL,
-	customersID int NOT NULL,
+	productID BIGINT UNSIGNED NOT NULL,
+	customerID BIGINT UNSIGNED NOT NULL,
 	quantity int NOT NULL,
 	tax float NOT NULL,
 	donation float NOT NULL,
 	subtotal double NOT NULL,
 	total double NOT NULL,
 	time text NOT NULL,
-	FOREIGN KEY (productsID) REFERENCES products(productID),
-	FOREIGN KEY (customersID) REFERENCES customers(customerID),
+	FOREIGN KEY (productID) REFERENCES products(productID),
+	FOREIGN KEY (customerID) REFERENCES customers(customerID),
 	PRIMARY KEY (orderID)
 );
 
 /*	Hash table for users	*/
 CREATE TABLE hash (
-	customersID int NOT NULL,
+	customerID BIGINT UNSIGNED NOT NULL,
 	salt varchar(255) NOT NULL,
 	hash varchar(255) NOT NULL,
-	FOREIGN KEY (customersID) REFERENCES customers(customerID),
-	PRIMARY KEY (customerID)
+	FOREIGN KEY (customerID) REFERENCES customers(customerID)
 );
 
 -- Insert items into products.  'Image' will store the value for the <option> within the html.
