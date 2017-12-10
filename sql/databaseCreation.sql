@@ -64,4 +64,4 @@ INSERT INTO customers(firstName, lastName, email)
 VALUES ('test', 'test', 'test@gmail.com');
 
 INSERT INTO hash(customerID, salt, hash)
-VALUES (1, 'salt', '$2y$10$ByQRt0B1FDZ53W9nRUQOUOWyMvguLnbfcreCdYUSozzWlvM5U5lb.');
+VALUES (1, 'salt', 'salSp1wOPp6fk');
