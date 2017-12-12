@@ -1,0 +1,23 @@
+
+
+ul {
+	list-style-type: none;
+	float: right;
+}
+
+li {
+	margin: 10px;
+	display: inline-block;
+}
+
+a {
+	padding: 5px;
+	transition: padding-right 0.5s ease;
+	border: 1px solid black;
+	border-radius: 0px 5px 5px 0px;
+	text-decoration: none;
+}
+
+a:hover {
+	padding-right: 25px;
+}
