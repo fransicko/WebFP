@@ -100,11 +100,12 @@
 				$_SESSION["id"] = $id;
 				date_default_timezone_set('America/Denver');
 				$_SESSION["date"] = date('l jS \of F Y h:m A');
-				echo '<script type="text/javascript">
+				/*echo '<script type="text/javascript">
 						alert("TODO: Insert link to next page");
 					</script>'; 
-				//header('Location: http://localhost/php/form_submit.php ');
-				//exit();
+				*/
+				header('Location: ../welcome/welcome.php');
+				die();
 				
 				
 			  }
