@@ -104,6 +104,11 @@
 				$_SESSION['loggedIn'] = true;
 				$_SESSION['customerID'] = $id; 				
 				$_SESSION["date"] = date('l jS \of F Y h:m A');
+				
+				$cookie_name = "user";
+				$cookie_value = $id;
+				setcookie($cookie_name, $cookie_value, time() + (30), "/"); // 86400 = 1 day
+				
 				header('Location: ../store/welcome.php');
 				die();
 				
