@@ -24,15 +24,13 @@
 			}
 			
 			if(!isset($_COOKIE[$cookie_name])) {
-				echo "Cookie named '" . $cookie_name . "' is not set!";
 				session_unset();
 				session_destroy();
 				header("Location: ../login/login.php");
 				die();
 				
 			} else {
-				echo "Cookie '" . $cookie_name . "' is set!<br>";
-				echo "Value is: " . $_COOKIE[$cookie_name];
+				// nothing
 			}
 		
 			$server = "localhost";
@@ -123,9 +121,9 @@
 
 			  // Everything is validated
 			  if ($good == 3) {
-				  /*
+				
 				// multiple recipients
-				$to = $email;
+				$to = "mvillafu@mines.edu";//$email;
 
 				// subject
 				$subject = 'Password change';
@@ -137,7 +135,7 @@
 				  <title>Password change</title>
 				</head>
 				<body>
-				  <p>Here are the birthdays upcoming in August!</p>
+				  <a href="http://luna.mines.edu/mvillafu/WebFP/login/resetPassword.php">Click here to reset password.</a>
 				</body>
 				</html>
 				';
@@ -145,12 +143,13 @@
 				// To send HTML mail, the Content-type header must be set
 				$headers  = 'MIME-Version: 1.0' . "\r\n";
 				$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+				$headers .= 'From: <webmaster@example.com>' . "\r\n";
 
 				// Mail it
 				mail($to, $subject, $message, $headers);
-				*/
+				
 				echo '<script type="text/javascript">
-						alert("Passwords match.");
+						alert("Email has been sent");
 					</script>'; 
 			  }
 			}

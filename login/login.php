@@ -107,7 +107,7 @@
 				
 				$cookie_name = "user";
 				$cookie_value = $id;
-				setcookie($cookie_name, $cookie_value, time() + (30), "/"); // 86400 = 1 day
+				setcookie($cookie_name, $cookie_value, time() + (7200), "/"); // 86400 = 1 day
 				
 				header('Location: ../store/welcome.php');
 				die();
