@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS hash, orders, customers, products;
+DROP TABLE IF EXISTS hash, orders, cart, customers, products;
 
 CREATE TABLE customers (
 	customerID serial,
@@ -16,6 +16,15 @@ CREATE TABLE products (
 	prodType varchar(255) NOT NULL,
 	stock int,
 	PRIMARY KEY (productID)
+);
+
+CREATE TABLE cart (
+	cartID serial,
+	productID BIGINT UNSIGNED NOT NULL,
+	customerID BIGINT UNSIGNED NOT NULL,
+	FOREIGN KEY (productID) REFERENCES products(productID),
+	FOREIGN KEY (customerID) REFERENCES customers(customerID),
+	PRIMARY KEY (cartID)
 );
 
 CREATE TABLE orders (
