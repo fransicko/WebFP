@@ -10,12 +10,15 @@
 		<link rel="stylesheet" type="text/css" href="store.css" />
 	</head>
 	<body>
-		</header>
 		<?php 
+			$server = "localhost";
+			$user = "mvillafu";
+			$pass = "CQGQOMAS";
+			$db = "f17_mvillafu";
+			$page = "Welcome";
 			include '../templateHeader.php';
-		?>
-		<?php
-				$page = "Welcome";
+			
+			$page = "Welcome";
 				session_start();
 				if($_SESSION['loggedIn']) {
 					//allow
@@ -27,17 +30,6 @@
 				}
 				session_unset();
 				session_destroy();
-				//header("Location: ./welcome.php");
-				//die();
-				//echo '<h1>Welcome</h1>';
-		?>
-		<?php 
-			$server = "localhost";
-			$user = "mvillafu";
-			$pass = "CQGQOMAS";
-			$db = "f17_mvillafu";
-			$page = "Welcome";
-			include '../templateHeader.php';
 			
 			$conn = new mysqli($server, $user, $pass, $db);
 			if ($conn->connect_error) {
