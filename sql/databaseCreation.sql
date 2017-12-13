@@ -28,12 +28,11 @@ CREATE TABLE cart (
 );
 
 CREATE TABLE orders (
-	orderID int NOT NULL,
+	orderID serial,
 	productID BIGINT UNSIGNED NOT NULL,
 	customerID BIGINT UNSIGNED NOT NULL,
 	quantity int NOT NULL,
 	tax float NOT NULL,
-	donation float NOT NULL,
 	subtotal double NOT NULL,
 	total double NOT NULL,
 	time text NOT NULL,
