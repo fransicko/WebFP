@@ -1,6 +1,6 @@
 <header>
 
-	<h1>This is the store</h1>
+	<h1>The Dank Store</h1>
 	<nav>
 		<ul id="navbar">
 			<li><a href="welcome.php">Store</a><li>
@@ -10,7 +10,7 @@
 			<li class="dropdown">
 				<p class="dropbtn">Profile</p>
 				<div class="dropdowncontent">
-					<a href="#">Shopping Cart</a>
+					<a href="../store/shoppingCart.php">Shopping Cart</a>
 					<a href="../profile/profile.php">View Profile</a>
 					<a href="../login/logout.php">Log Out</a>
 				</div>

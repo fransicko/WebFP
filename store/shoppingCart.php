@@ -9,6 +9,11 @@
 		<link rel="stylesheet" type="text/css" href="../header.css" />
 		<link rel="stylesheet" type="text/css" href="store.css" />
 		
+		<script>
+			function addtocart(id) {
+				window.location.replace("./add_cart.php");
+			}
+		</script>
 	</head>
 	<body>
 		<?php 
@@ -52,44 +57,44 @@
 			$products = "";
 			$sql = "";
 			
-			if (empty($_GET["type"])) {
-				$sql = $conn->prepare("SELECT * FROM products");
-			}
-			else {
-				$type = $_GET["type"];
-				$sql = $conn->prepare("SELECT * FROM products WHERE prodType = ?");
-				$sql->bind_param("s", $type);
-			}
-			
+			$id = $_COOKIE[$cookie_name];
+				  
+			$sql = $conn->prepare("SELECT productID, count(*) FROM cart WHERE customerID = ? GROUP by productID");
+			$sql->bind_param("i", $id);
+
 			$sql->execute();
 			$products = $sql->get_result();
 			$sql->close();
-			
-			$sel = "SELECT COUNT(*) FROM cart WHERE customerID LIKE " . $_COOKIE[$cookie_name];
-			$res = $conn->query($sel);
-			$numCart = $res->fetch_assoc()["COUNT(*)"];
 			$i = 0;
 			
-			echo '<p id="cart">Shopping Cart: ' . $numCart . "</p>";
 			// Make a table with id = items
 			echo '<table id="items">';
-				echo "<tbody>";
 				echo "<tr>";
 				
 				while ($row = $products->fetch_assoc()) {
+					$sql = $conn->prepare("SELECT * FROM products WHERE productID = ?");
+					$sql->bind_param("i", $row["productID"]);
+
+					$sql->execute();
+					$prod = $sql->get_result();
+					$sql->close();
+					
+					$pRow = $prod->fetch_assoc();
 					// If i is divisible by 5 evenly, or the number of items that we will allow per row, end the row and make another
-					if ($i % 5 === 0 && $i !== 0) {
+					if ($i % 5 === 0) {
 						
 						echo "</tr>";
 						echo "<tr>";
 					}
+					$tPrice = $pRow["price"] * $row["count(*)"];
 					// The table data.
-					echo "<td>";	
-						echo '<form method="get" action="../store/add_cart.php">';
-						echo '<img width="150" height="150" src="../images/' . $row["image"] . '" alt="no img" />';
-						echo '<span style="display: block">' . $row["name"] . '</span>';
-						echo '<input type="submit" value="Add to Cart">';
-						echo '<input type="hidden" name="item" value="' . $row["productID"] .'">';
+					echo "<td>";
+						echo '<form method="get" action="../store/delete_cart.php?pid=' . $pRow["productID"] . '">';
+						echo '<img width="150" height="150" src="../images/' . $pRow["image"] . '" alt="no img" />';
+						echo '<span style="display: block">' . $pRow["name"] . '</span>';
+						echo '<span style="display: block">Price: $'. $tPrice .' Quantity: '. $row["count(*)"] . '</span>';
+						echo '<input type="submit" style="display:block" value="Delete from Cart">';
+						echo '<input type="hidden" name="item" value="' . $pRow["productID"] .'">';
 						echo "</form>";
 					echo "</td>";
 					$i++; // Increase i by 1
@@ -97,12 +102,17 @@
 				// Make an empty row at the end of the table if the number of items is divisible by 3
 				// or finish the current table row
 				echo "</tr>";
-				echo "</tbody>";
 			echo "</table>";
 			
+			echo "<br><br>";
+			
+			echo '<form method="get" action="../store/buy_cart.php">';
+				echo '<input type="submit" style="display:block" value="Buy Items">';
+			echo "</form>";
 			// Done, so close it.
 			$conn->close();
-			die();
+			//session_unset();
+			//session_destroy();
 		?>
 		
 	</body>
