@@ -21,22 +21,19 @@
 			include '../templateHeader.php';
 			
 			$page = "Welcome";
-			/*
-				session_start();
-				if($_SESSION['loggedIn']) {
-					//allow
-				}
-				else {
-					//redirect to the login page
-					header("Location: ../login/login.php");
-					die();
-				}
-				session_unset();
-				session_destroy();
-			*/
 			$conn = new mysqli($server, $user, $pass, $db);
 			if ($conn->connect_error) {
 				die("Connection failed: " . $conn->connect_error);
+			}
+			
+			session_start();
+			if($_SESSION['loggedIn']) {
+				//allow
+			}
+			else {
+				//redirect to the login page
+				header("Location: ./login.php");
+				die();
 			}
 			
 			// So off the bat we will just grab all the items
@@ -63,8 +60,8 @@
 			echo '<table id="items">';
 				echo "<tr>";
 				while ($row = $products->fetch_assoc()) {
-					// If i is 3, or the number of items that we will allow per row, end the row and make another
-					if ($i === 3) {
+					// If i is divisible by 5 evenly, or the number of items that we will allow per row, end the row and make another
+					if ($i % 5 === 0) {
 						echo "</tr>";
 						echo "<tr>";
 					}

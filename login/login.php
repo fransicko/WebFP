@@ -119,8 +119,9 @@
 		
 		<!-- Really simple log in for now -->
 		<form class="login" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
-			<legend>User Credentials</legend>
 			<fieldset>
+				<legend>User Credentials</legend>
+			
 				<p>
 					<input type="text" id="email" placeholder="Email" name="email" value="<?php echo $email;?>">
 					<span class="error">* <?php echo $emailErr;?></span>
