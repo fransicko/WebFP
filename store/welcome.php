@@ -36,7 +36,7 @@
 			}
 			else {
 				//redirect to the login page
-				header("Location: ./login.php");
+				header("Location: ../login/login.php");
 				die();
 			}
 			
@@ -88,6 +88,8 @@
 			
 			// Done, so close it.
 			$conn->close();
+			//session_unset();
+			//session_destroy();
 		?>
 		
 	</body>
