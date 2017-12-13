@@ -25,6 +25,7 @@
 			// Form validation
 			$emailErr = $passErr = "";
 			$email = $password = "";
+			$id = 0;
 			$good = 0;
 			$picture = ""; // This will be used for switching the pictures
 
@@ -100,7 +101,8 @@
 				$_SESSION["id"] = $id;
 				date_default_timezone_set('America/Denver');
 				session_start();
-				$_SESSION['loggedIn'] = true;  
+				$_SESSION['loggedIn'] = true;
+				$_SESSION['customerID'] = $id; 				
 				$_SESSION["date"] = date('l jS \of F Y h:m A');
 				header('Location: ../store/welcome.php');
 				die();

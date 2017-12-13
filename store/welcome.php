@@ -8,12 +8,46 @@
 		<meta charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="../header.css" />
 		<link rel="stylesheet" type="text/css" href="store.css" />
+		<script language="javascript">
+			function addtocart($cust, $id) {
+				<?php
+					$server = "localhost";
+					$user = "mvillafu";
+					$pass = "CQGQOMAS";
+					$db = "f17_mvillafu";
+					$conn = new mysqli($server, $user, $pass, $db);
+					if ($conn->connect_error) {
+						die("Connection failed: " . $conn->connect_error);
+					}
+					
+					// insert into cart table
+					//alert(id);
+					$sql = $conn->prepare("INSERT INTO cart (productID, customerID) VALUES(?, ?)");
+					$sql->bind_param("ii", $id, $cust);
+					$sql->execute();
+					$sql->close();
+					
+					$conn->close();
+				?>
+				alert($cust);
+				alert($id);
+				alert("Fuck you");
+			}
+		</script>
 	</head>
 	<body>
 		</header>
-		<?php
-				$page = "Welcome";
+		<?php 
+			$server = "localhost";
+			$user = "mvillafu";
+			$pass = "CQGQOMAS";
+			$db = "f17_mvillafu";
+			$page = "Welcome";
+			include '../templateHeader.php';
+			
+			$page = "Welcome";
 				session_start();
+				$id = $_SESSION['customerID'];
 				if($_SESSION['loggedIn']) {
 					//allow
 				}
@@ -24,17 +58,6 @@
 				}
 				session_unset();
 				session_destroy();
-				//header("Location: ./welcome.php");
-				//die();
-				//echo '<h1>Welcome</h1>';
-		?>
-		<?php 
-			$server = "localhost";
-			$user = "mvillafu";
-			$pass = "CQGQOMAS";
-			$db = "f17_mvillafu";
-			$page = "Welcome";
-			include '../templateHeader.php';
 			
 			$conn = new mysqli($server, $user, $pass, $db);
 			if ($conn->connect_error) {
@@ -74,7 +97,7 @@
 					echo "<td>";
 						echo '<img width="150" height="150" src="../images/a6/' . $row["image"] . '.jpg" alt="no img" />';
 						echo '<span style="display: block">' . $row["name"] . '</span>';
-						echo '<input type="button" style="display:block" value="Add to Cart">';
+						echo '<input type="button" style="display:block" onclick="addtocart('. $id .','. $row["productID"] .')" value="Add to Cart">';
 					echo "</td>";
 					$i++; // Increase i by 1
 				}
