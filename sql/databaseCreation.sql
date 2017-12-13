@@ -93,6 +93,11 @@ VALUES ("White Shirt - Women", 7.99, "whiteTop.jpg", "women", 20);
 /*	Insert a test customer	*/
 INSERT INTO customers(firstName, lastName, email)
 VALUES ('test', 'test', 'test@gmail.com');
+/*	Insert a test customer	*/
+INSERT INTO customers(firstName, lastName, email)
+VALUES ('michael', 'villafuerte', 'mvillafu@mines.edu');
 
 INSERT INTO hash(customerID, salt, hash)
 VALUES (1, 'salt', 'salSp1wOPp6fk');
+INSERT INTO hash(customerID, salt, hash)
+VALUES (2, 'salt', 'salSp1wOPp6fk');

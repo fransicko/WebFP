@@ -123,7 +123,7 @@
 			  if ($good == 3) {
 				
 				// multiple recipients
-				$to = "mvillafu@mines.edu";//$email;
+				$to = $email;
 
 				// subject
 				$subject = 'Password change';
