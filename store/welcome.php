@@ -60,6 +60,21 @@
 			$sql->close();
 			$i = 0;
 			
+			if ($_SERVER["REQUEST_METHOD"] == "GET") {
+				$sel = "SELECT COUNT(*) FROM products";
+				$res = $conn->query($sel);
+				$count = $res->fetch_assoc()["COUNT(*)"];
+				
+				session_start();
+				for ($i = 1; $i < $count + 1; $i++) {
+					if (!empty($_GET["item" . $i])) {
+						$_SESSION["productID"] = $_GET["item" . $i];
+					}
+				}
+				header("Location: ../store/add_cart.php");
+				die();
+			}
+			
 			// Make a table with id = items
 			echo '<table id="items">';
 				echo "<tr>";
@@ -73,10 +88,12 @@
 					}
 					// The table data.
 					echo "<td>";
-						echo "<form>";
-						echo '<img id="item' . $row["productID"] . '" width="150" height="150" src="../images/a6/' . $row["image"] . '.jpg" alt="no img" />';
+						
+						echo '<form method="get" action="' . $_SERVER["PHP_SELF"] . '">';
+						echo '<img width="150" height="150" src="../images/a6/' . $row["image"] . '.jpg" alt="no img" />';
 						echo '<span style="display: block">' . $row["name"] . '</span>';
-						echo '<input type="submit" style="display:block" formaction="add_cart.php" value="Add to Cart">';
+						echo '<input type="submit" style="display:block" value="Add to Cart">';
+						echo '<input type="hidden" name="item' . $row["productID"] . '" value="' . $row["name"] .'">';
 						echo "</form>";
 					echo "</td>";
 					$i++; // Increase i by 1
