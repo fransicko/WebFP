@@ -33,13 +33,27 @@
 			}
 			
 			// So off the bat we will just grab all the items
-			$sql = "SELECT * FROM products";
+			//$type = $_GET["type"];
+			$type = "";
+			$products = "";
+			$sql = "";
+			if (empty($_GET["type"])) {
+				$sql = $conn->prepare("SELECT * FROM products");
+			}
+			else {
+				$type = $_GET["type"];
+				$sql = $conn->prepare("SELECT * FROM products WHERE prodType = ?");
+				$sql->bind_param("s", $type);
+			}
+			
+			$sql->execute();
+			$products = $sql->get_result();
+			$sql->close();
 			$count = 0;
 			$maxRow = 3;
-			$products = mysqli_query($conn, $sql);
 			echo '<table id="items">';
 			if (mysqli_num_rows($products) > 0) {
-				while ($prod = mysqli_fetch_assoc($products)) {
+				while ($prod = $products->fetch_assoc()) {
 					if ($count == 0) { // new row images are links
 						echo '<tr><td><img src="../images/a6/'. $prod["image"] .'.jpg">';
 						echo '<span style="display: block">'.  $prod["name"] .'</span>';
@@ -69,7 +83,6 @@
 				echo '</table>';
 			}
 			echo '</table>';
-			
 		?>
 		
 	</body>
