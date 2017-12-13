@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Log In</title>
+		<title>Profile</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="author" content="Truyen Van Michael Villafuerte Khanh Duong" />
 		<meta name="description" content="This website is for the Final Project in CSCI445" />
@@ -177,6 +177,10 @@
 				<p>
 					<input type="password" id="check" placeholder="Re-type Password" name="check" value="<?php echo $check;?>">
 					<span class="error">* <?php echo $checkErr;?></span>
+				</p>
+				
+				<p>
+					<a href="../store/welcome.php">Go Back</a>
 				</p>
 				
 				

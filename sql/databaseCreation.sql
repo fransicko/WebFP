@@ -50,24 +50,46 @@ CREATE TABLE hash (
 	FOREIGN KEY (customerID) REFERENCES customers(customerID)
 );
 
--- Insert items into products.  'Image' will store the value for the <option> within the html.
--- This is because selection of images is defined in a .js which uses the value in <option>
+-- Insert items into products.  'Image' will store the location for the img within the html.
 
--- The Chicago Typewriter from Resident Evil 4
 INSERT INTO products(name, price, image, prodType, stock)
-VALUES ('Chicago Typewriter', 1000000, 'typewriter', 'Men', 10);
+VALUES ("Bird Dress - Kids", 5.99, "birdDress.jpg", "child", 10);
 
--- The Apple Gel from Tales of Symphonia
 INSERT INTO products(name, price, image, prodType, stock)
-VALUES ('Apple Gel', 225, 'apple', 'Men', 99);
+VALUES ("Black Dress (Short) - Women", 15.99, "blackDress1.jpg", "women", 250);
 
--- The Phoenix Down from Final Fantasy
 INSERT INTO products(name, price, image, prodType, stock)
-VALUES ('Phoenix Down', 515, 'phoenix', 'Women', 99);
+VALUES ("Bird Dress (Long) - Women", 15.99, "blackDress2.jpg", "women", 5);
 
--- An Iron Helmet from the The Elder Scrolls series
 INSERT INTO products(name, price, image, prodType, stock)
-VALUES ('Iron Helmet', 122, 'helmet', 'Child', 15);
+VALUES ("Blue Shirt with Cardigan - Women", 19.99, "blueShirt1.jpg", "women", 10);
+
+INSERT INTO products(name, price, image, prodType, stock)
+VALUES ("Blue Long-sleeve Shirt - Women", 10.99, "blueShirt2.jpg", "women", 200);
+
+INSERT INTO products(name, price, image, prodType, stock)
+VALUES ("Blue Polo - Men", 5.99, "blueShirt3.jpg", "men", 100);
+
+INSERT INTO products(name, price, image, prodType, stock)
+VALUES ("Bunny Outfit - Women", 70.99, "bunny.jpg", "women", 2);
+
+INSERT INTO products(name, price, image, prodType, stock)
+VALUES ("Grey-stripe Tanktop - Kids", 7.99, "greyTank.jpg", "child", 25);
+
+INSERT INTO products(name, price, image, prodType, stock)
+VALUES ("Perfect Day T-Shirt - Kids", 10.99, "kids3.jpg", "child", 30);
+
+INSERT INTO products(name, price, image, prodType, stock)
+VALUES ("Penguin Sweater - Kids", 15.99, "pengSweater.jpg", "child", 20);
+
+INSERT INTO products(name, price, image, prodType, stock)
+VALUES ("Red Dress - Women", 30.99, "redDress.jpg", "women", 15);
+
+INSERT INTO products(name, price, image, prodType, stock)
+VALUES ("White Dress - Women", 15.99, "whiteDress.jpg", "women", 10);
+
+INSERT INTO products(name, price, image, prodType, stock)
+VALUES ("White Shirt - Women", 7.99, "whiteTop.jpg", "women", 20);
 
 /*	Insert a test customer	*/
 INSERT INTO customers(firstName, lastName, email)
