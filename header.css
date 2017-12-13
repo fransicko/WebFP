@@ -25,6 +25,7 @@ a {
 
 a:hover {
 	background-color: orange;
+	cursor: pointer;
 }
 
 a:visited {

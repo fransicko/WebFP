@@ -46,6 +46,7 @@
 			include '../templateHeader.php';
 			
 			$page = "Welcome";
+			
 				session_start();
 				$id = $_SESSION['customerID'];
 				if($_SESSION['loggedIn']) {
