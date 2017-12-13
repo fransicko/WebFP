@@ -70,8 +70,8 @@
 			$products = $sql->get_result();
 			$sql->close();
 			$i = 0;
-			
-			if ($_SERVER["REQUEST_METHOD"] == "GET") {
+			/*
+			if ($_SERVER["REQUEST_METHOD"] === "GET") {
 				$sel = "SELECT COUNT(*) FROM products";
 				$res = $conn->query($sel);
 				$count = $res->fetch_assoc()["COUNT(*)"];
@@ -85,6 +85,7 @@
 				//header("Location: ../store/add_cart.php");
 				//die();
 			}
+			*/
 			
 			// Make a table with id = items
 			echo '<table id="items">';
@@ -99,12 +100,11 @@
 					}
 					// The table data.
 					echo "<td>";
-						
-						echo '<form method="GET" action="' . $_SERVER["PHP_SELF"] . '">';
+						echo '<form method="get" action="../store/add_cart.php?pid=' . $row["productID"] . '">';
 						echo '<img width="150" height="150" src="../images/a6/' . $row["image"] . '.jpg" alt="no img" />';
 						echo '<span style="display: block">' . $row["name"] . '</span>';
 						echo '<input type="submit" style="display:block" value="Add to Cart">';
-						echo '<input type="hidden" name="item' . $row["productID"] . '" value="' . $row["name"] .'">';
+						echo '<input type="hidden" name="item" value="' . $row["productID"] .'">';
 						echo "</form>";
 					echo "</td>";
 					$i++; // Increase i by 1
