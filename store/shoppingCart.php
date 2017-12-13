@@ -81,7 +81,7 @@
 					
 					$pRow = $prod->fetch_assoc();
 					// If i is divisible by 5 evenly, or the number of items that we will allow per row, end the row and make another
-					if ($i % 5 === 0) {
+					if ($i % 5 === 0 && $i !== 0) {
 						
 						echo "</tr>";
 						echo "<tr>";
@@ -93,13 +93,13 @@
 						echo '<img width="150" height="150" src="../images/' . $pRow["image"] . '" alt="no img" />';
 						echo '<span style="display: block">' . $pRow["name"] . '</span>';
 						echo '<span style="display: block">Price: $'. $tPrice .' Quantity: '. $row["count(*)"] . '</span>';
-						echo '<input type="submit" style="display:block" value="Delete from Cart">';
+						echo '<input type="submit" value="Delete from Cart">';
 						echo '<input type="hidden" name="item" value="' . $pRow["productID"] .'">';
 						echo "</form>";
 					echo "</td>";
 					$i++; // Increase i by 1
 				}
-				// Make an empty row at the end of the table if the number of items is divisible by 3
+				// Make an empty row at the end of the table if the number of items is divisible by 5
 				// or finish the current table row
 				echo "</tr>";
 			echo "</table>";
@@ -107,7 +107,7 @@
 			echo "<br><br>";
 			
 			echo '<form method="get" action="../store/buy_cart.php">';
-				echo '<input type="submit" style="display:block" value="Buy Items">';
+				echo '<input type="submit" style="margin:auto;display:block" value="Buy Items">';
 			echo "</form>";
 			// Done, so close it.
 			$conn->close();
