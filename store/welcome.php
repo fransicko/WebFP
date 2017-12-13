@@ -8,6 +8,8 @@
 		<meta charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="../header.css" />
 		<link rel="stylesheet" type="text/css" href="store.css" />
+		
+		
 	</head>
 	<body>
 		<?php 
@@ -19,6 +21,7 @@
 			include '../templateHeader.php';
 			
 			$page = "Welcome";
+			/*
 				session_start();
 				if($_SESSION['loggedIn']) {
 					//allow
@@ -30,7 +33,7 @@
 				}
 				session_unset();
 				session_destroy();
-			
+			*/
 			$conn = new mysqli($server, $user, $pass, $db);
 			if ($conn->connect_error) {
 				die("Connection failed: " . $conn->connect_error);
