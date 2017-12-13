@@ -106,7 +106,7 @@
 			
 			echo "<br><br>";
 			
-			echo '<form method="get" action="../store/buy_cart.php?pid=1">';
+			echo '<form method="get" action="../store/buy_cart.php">';
 				echo '<input type="submit" style="display:block" value="Buy Items">';
 			echo "</form>";
 			// Done, so close it.

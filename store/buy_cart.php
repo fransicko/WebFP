@@ -10,7 +10,7 @@
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
 	}
-	
+							
 	$type = "";
 	$products = "";
 	$sql = "";
@@ -35,13 +35,13 @@
 		$pRow = $prod->fetch_assoc();
 		
 		$subTotal = $pRow["price"] * $row["count(*)"];
-		$quantity = $pRow["quantity"];
+		$quantity = $row["count(*)"];
 		$tax = .07 * $subTotal;
 		$tax = number_format($tax, 2, '.', '');
 		$my_date = date("Y-m-d H:i:s");
 		$total = $tax + $subTotal;
 		
-		$ins = "INSERT INTO orders (productID, customerID, qunatity, tax, subtotal, total, time) VALUES (" . $row["productID"] . ", " . $_COOKIE[$cookie_name] . ", ". $quantity .", ". $tax .", ". $subTotal .", ". $total . ", ". $my_date. ")";
+		$ins = "INSERT INTO orders (productID, customerID, quantity, tax, subtotal, total, time) VALUES (" . $row["productID"] . ", " . $_COOKIE[$cookie_name] . ", ". $quantity .", ". $tax .", ". $subTotal .", ". $total . ", '". $my_date. "')";
 		$conn->query($ins);
 	}
 	
