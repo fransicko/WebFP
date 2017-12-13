@@ -12,6 +12,12 @@
 	<body>
 		
 		<?php
+		
+			$server = "localhost";
+			$user = "mvillafu";
+			$pass = "CQGQOMAS";
+			$db = "f17_mvillafu";
+			
 			$cookie_name = "user";
 			session_start();
 			if($_SESSION['loggedIn']) {
@@ -26,6 +32,13 @@
 			if(!isset($_COOKIE[$cookie_name])) {
 				session_unset();
 				session_destroy();
+				$conn = new mysqli($server, $user, $pass, $db);
+				if ($conn->connect_error) {
+					die("Connection failed: " . $conn->connect_error);
+				}
+				$ins = "DELETE FROM cart";
+				$conn->query($ins);
+				$conn->close();
 				header("Location: ../login/login.php");
 				die();
 				
@@ -33,10 +46,6 @@
 				// nothing
 			}
 		
-			$server = "localhost";
-			$user = "mvillafu";
-			$pass = "CQGQOMAS";
-			$db = "f17_mvillafu";
 			
 			$conn = new mysqli($server, $user, $pass, $db);
 			if ($conn->connect_error) {
