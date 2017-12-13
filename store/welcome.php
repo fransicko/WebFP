@@ -7,25 +7,16 @@
 		<meta name="description" content="This website is for Assignment 0 of the Fall CSCI 445 class.">
 		<meta charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="../header.css" />
+		<link rel="stylesheet" type="text/css" href="store.css" />
 	</head>
 	<body>
-		</header>
-		<?php 
-			include '../templateHeader.php';
-		?>
-		<?php
-				$page = "Welcome";
-				//header("Location: ./welcome.php");
-				//die();
-				//echo '<h1>Welcome</h1>';
-		?>
-		
-		
 		<?php 
 			$server = "localhost";
 			$user = "mvillafu";
 			$pass = "CQGQOMAS";
 			$db = "f17_mvillafu";
+			$page = "Welcome";
+			include '../templateHeader.php';
 			
 			$conn = new mysqli($server, $user, $pass, $db);
 			if ($conn->connect_error) {
@@ -49,40 +40,32 @@
 			$sql->execute();
 			$products = $sql->get_result();
 			$sql->close();
-			$count = 0;
-			$maxRow = 3;
+			$i = 0;
+			
+			// Make a table with id = items
 			echo '<table id="items">';
-			if (mysqli_num_rows($products) > 0) {
-				while ($prod = $products->fetch_assoc()) {
-					if ($count == 0) { // new row images are links
-						echo '<tr><td><img src="../images/a6/'. $prod["image"] .'.jpg">';
-						echo '<span style="display: block">'.  $prod["name"] .'</span>';
-						echo '<input type="button" style="display:block" value="Add to Cart">';
-						echo '</td>';
-						$count = $count + 1;
+				echo "<tr>";
+				while ($row = $products->fetch_assoc()) {
+					// If i is 3, or the number of items that we will allow per row, end the row and make another
+					if ($i === 3) {
+						echo "</tr>";
+						echo "<tr>";
 					}
-					else if ($count == ($maxRow-1)) {
-						// We will end the link with a new row
-						echo '<td><img src="../images/a6/'. $prod["image"] .'.jpg">';
-						echo '<span style="display: block">'.  $prod["name"] .'</span>';
+					// The table data.
+					echo "<td>";
+						echo '<img width="150" height="150" src="../images/a6/' . $row["image"] . '.jpg" alt="no img" />';
+						echo '<span style="display: block">' . $row["name"] . '</span>';
 						echo '<input type="button" style="display:block" value="Add to Cart">';
-						echo '</td></tr>';
-						$count = 0;
-					}
-					else {
-						echo '<td><img src="../images/a6/'. $prod["image"] .'.jpg">';
-						echo '<span style="display: block">'.  $prod["name"] .'</span>';
-						echo '<input type="button" style="display:block" value="Add to Cart">';
-						echo '</td>';
-						$count = $count + 1;
-					}
+					echo "</td>";
+					$i++; // Increase i by 1
 				}
-				if ($count != 0) {
-					echo '</tr>';
-				}
-				echo '</table>';
-			}
-			echo '</table>';
+				// Make an empty row at the end of the table if the number of items is divisible by 3
+				// or finish the current table row
+				echo "</tr>";
+			echo "</table>";
+			
+			// Done, so close it.
+			$conn->close();
 		?>
 		
 	</body>

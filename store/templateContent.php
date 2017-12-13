@@ -1,4 +1,5 @@
-<table>
+<!-- Start by making html table -->
+<table id="items">
 
 	<?php
 		$server = "localhost";
@@ -11,7 +12,7 @@
 			die("Connection failed: " . $conn->connect_error);
 		}
 		
-		$sel = "SELECT image FROM products";
+		$sel = "SELECT image, name FROM products";
 		$res = $conn->query($sel);
 		$i = 0;
 		
@@ -22,8 +23,8 @@
 				echo "<tr>";
 			}
 			echo "<td>";
-				echo '<img src="../images/a6/' . $row["image"] . '.jpg" alt="no img" />';
-				echo '<span style="display: block">Info</span>';
+				echo '<img width="150" height="150" src="../images/a6/' . $row["image"] . '.jpg" alt="no img" />';
+				echo '<span style="display: block">' . $row["name"] . '</span>';
 				echo '<input type="button" style="display:block" value="Add to Cart">';
 			echo "</td>";
 			$i++;
