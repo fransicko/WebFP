@@ -15,6 +15,17 @@
 		?>
 		<?php
 				$page = "Welcome";
+				session_start();
+				if($_SESSION['loggedIn']) {
+					//allow
+				}
+				else {
+					//redirect to the login page
+					header("Location: ../login/login.php");
+					die();
+				}
+				session_unset();
+				session_destroy();
 				//header("Location: ./welcome.php");
 				//die();
 				//echo '<h1>Welcome</h1>';
@@ -37,6 +48,7 @@
 			$type = "";
 			$products = "";
 			$sql = "";
+			
 			if (empty($_GET["type"])) {
 				$sql = $conn->prepare("SELECT * FROM products");
 			}

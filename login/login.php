@@ -99,6 +99,8 @@
 				session_start();
 				$_SESSION["id"] = $id;
 				date_default_timezone_set('America/Denver');
+				session_start();
+				$_SESSION['loggedIn'] = true;  
 				$_SESSION["date"] = date('l jS \of F Y h:m A');
 				header('Location: ../store/welcome.php');
 				die();
