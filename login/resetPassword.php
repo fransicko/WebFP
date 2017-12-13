@@ -78,41 +78,32 @@
 				  // grab the customers id first
 				  $id = $_COOKIE[$cookie_name];
 				  
-				  $sql = $conn->prepare("SELECT salt, hash FROM hash WHERE customerID = ?");
+				  $sql = $conn->prepare("SELECT salt FROM hash WHERE customerID = ?");
 				  $sql->bind_param("i", $id);
 				  $sql->execute();
 				  $result = $sql->get_result();
 				  $sql->close();
 				  
-				  $sql = $conn->prepare("SELECT email FROM customers WHERE customerID = ?");
-				  $sql->bind_param("i", $id);
-				  $sql->execute();
-				  $eResult = $sql->get_result();
-				  $sql->close();
-				  $row = $eResult->fetch_assoc();
-				  $email = $row["email"];
-				  
 				  if (mysqli_num_rows($result) > 0) {
 					  $row = $result->fetch_assoc();
 					  $salt = $row["salt"];
 					  
-					  $hash = $row["hash"];
+					  
+					  
 					  $hashpass = crypt($password, $salt);
 					  
-					  if ($hash == $hashpass) {
-						  $good = $good + 1;
-					  }
-					  else {
-						  echo '<script type="text/javascript">
-								alert("Password is wrong");
-							</script>'; 
-					  }
+					  $sql = $conn->prepare("UPDATE hash SET hash = ? WHERE customerID = ?");
+					  $sql->bind_param("si", $hashpass, $id);
+					  $sql->execute();
+					  $sql->close();
+					  $good = $good + 1;
 				  }
 			  }
 			  else {
 				  echo '<script type="text/javascript">
 						alert("Passwords do not match.");
-					</script>'; 
+					</script>';
+									
 			  }
 			  
 			  
@@ -122,35 +113,13 @@
 			  // Everything is validated
 			  if ($good == 3) {
 				
-				// multiple recipients
-				$to = "mvillafu@mines.edu";//$email;
-
-				// subject
-				$subject = 'Password change';
-
-				// message
-				$message = '
-				<html>
-				<head>
-				  <title>Password change</title>
-				</head>
-				<body>
-				  <a href="http://luna.mines.edu/mvillafu/WebFP/login/resetPassword.php">Click here to reset password.</a>
-				</body>
-				</html>
-				';
-
-				// To send HTML mail, the Content-type header must be set
-				$headers  = 'MIME-Version: 1.0' . "\r\n";
-				$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-				$headers .= 'From: <webmaster@example.com>' . "\r\n";
-
-				// Mail it
-				mail($to, $subject, $message, $headers);
-				
 				echo '<script type="text/javascript">
-						alert("Email has been sent");
+						alert("Passwords has been reset.");
 					</script>'; 
+					setcookie("user", "", time() - 3600);
+					$_SESSION['loggedIn'] = false;
+					header("Location: ./login.php");
+					die();	
 			  }
 			}
 			function test_input($data) {
@@ -167,10 +136,10 @@
 		<!-- Really simple log in for now -->
 		<form class="login" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
 			<fieldset>
-				<legend>Enter Password to reset password</legend>
+				<legend>Enter New Password</legend>
 			
 				<p>
-					<input type="password" id="password" placeholder="Password" name="password" value="<?php echo $password;?>">
+					<input type="password" id="password" placeholder="New Password" name="password" value="<?php echo $password;?>">
 					<span class="error">* <?php echo $passErr;?></span>
 				</p>
 				

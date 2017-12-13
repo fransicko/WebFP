@@ -30,6 +30,7 @@
 				die("Connection failed: " . $conn->connect_error);
 			}
 			
+			$cookie_name = "user";
 			session_start();
 			if($_SESSION['loggedIn']) {
 				//allow
@@ -38,6 +39,16 @@
 				//redirect to the login page
 				header("Location: ../login/login.php");
 				die();
+			}
+			
+			if(!isset($_COOKIE[$cookie_name])) {
+				session_unset();
+				session_destroy();
+				header("Location: ../login/login.php");
+				die();
+				
+			} else {
+				// nothing
 			}
 			
 			// So off the bat we will just grab all the items
