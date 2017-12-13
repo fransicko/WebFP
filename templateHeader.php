@@ -1,4 +1,6 @@
 <header>
+
+	<h1>This is the store</h1>
 	<nav>
 		<ul id="navbar">
 			<li><a href="#">Men's</a></li>
