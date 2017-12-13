@@ -8,35 +8,14 @@
 		<meta charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="../header.css" />
 		<link rel="stylesheet" type="text/css" href="store.css" />
-		<script language="javascript">
-			function addtocart($cust, $id) {
-				<?php
-					$server = "localhost";
-					$user = "mvillafu";
-					$pass = "CQGQOMAS";
-					$db = "f17_mvillafu";
-					$conn = new mysqli($server, $user, $pass, $db);
-					if ($conn->connect_error) {
-						die("Connection failed: " . $conn->connect_error);
-					}
-					
-					// insert into cart table
-					//alert(id);
-					$sql = $conn->prepare("INSERT INTO cart (productID, customerID) VALUES(?, ?)");
-					$sql->bind_param("ii", $id, $cust);
-					$sql->execute();
-					$sql->close();
-					
-					$conn->close();
-				?>
-				alert($cust);
-				alert($id);
-				alert("Fuck you");
+		
+		<script>
+			function addtocart(id) {
+				window.location.replace("./add_cart.php");
 			}
 		</script>
 	</head>
 	<body>
-		</header>
 		<?php 
 			$server = "localhost";
 			$user = "mvillafu";
@@ -84,17 +63,21 @@
 			// Make a table with id = items
 			echo '<table id="items">';
 				echo "<tr>";
+				
 				while ($row = $products->fetch_assoc()) {
 					// If i is divisible by 5 evenly, or the number of items that we will allow per row, end the row and make another
 					if ($i % 5 === 0) {
+						
 						echo "</tr>";
 						echo "<tr>";
 					}
 					// The table data.
 					echo "<td>";
-						echo '<img width="150" height="150" src="../images/a6/' . $row["image"] . '.jpg" alt="no img" />';
+						echo "<form>";
+						echo '<img id="item' . $row["productID"] . '" width="150" height="150" src="../images/a6/' . $row["image"] . '.jpg" alt="no img" />';
 						echo '<span style="display: block">' . $row["name"] . '</span>';
-						echo '<input type="button" style="display:block" onclick="addtocart('. $id .','. $row["productID"] .')" value="Add to Cart">';
+						echo '<input type="submit" style="display:block" formaction="add_cart.php" value="Add to Cart">';
+						echo "</form>";
 					echo "</td>";
 					$i++; // Increase i by 1
 				}
