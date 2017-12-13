@@ -13,6 +13,7 @@ CREATE TABLE products (
 	name varchar(255) NOT NULL,
 	price int NOT NULL,
 	image text NOT NULL,
+	prodType varchar(255) NOT NULL,
 	stock int,
 	PRIMARY KEY (productID)
 );
@@ -44,20 +45,20 @@ CREATE TABLE hash (
 -- This is because selection of images is defined in a .js which uses the value in <option>
 
 -- The Chicago Typewriter from Resident Evil 4
-INSERT INTO products(name, price, image, stock)
-VALUES ('Chicago Typewriter', 1000000, 'typewriter', 10);
+INSERT INTO products(name, price, image, prodType, stock)
+VALUES ('Chicago Typewriter', 1000000, 'typewriter', 'Men', 10);
 
 -- The Apple Gel from Tales of Symphonia
-INSERT INTO products(name, price, image, stock)
-VALUES ('Apple Gel', 225, 'apple', 99);
+INSERT INTO products(name, price, image, prodType, stock)
+VALUES ('Apple Gel', 225, 'apple', 'Men', 99);
 
 -- The Phoenix Down from Final Fantasy
-INSERT INTO products(name, price, image, stock)
-VALUES ('Phoenix Down', 515, 'phoenix', 99);
+INSERT INTO products(name, price, image, prodType, stock)
+VALUES ('Phoenix Down', 515, 'phoenix', 'Women', 99);
 
 -- An Iron Helmet from the The Elder Scrolls series
-INSERT INTO products(name, price, image, stock)
-VALUES ('Iron Helmet', 122, 'helmet', 15);
+INSERT INTO products(name, price, image, prodType, stock)
+VALUES ('Iron Helmet', 122, 'helmet', 'Child', 15);
 
 /*	Insert a test customer	*/
 INSERT INTO customers(firstName, lastName, email)
