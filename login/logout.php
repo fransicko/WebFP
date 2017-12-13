@@ -15,20 +15,24 @@
 				$user = "mvillafu";
 				$pass = "CQGQOMAS";
 				$db = "f17_mvillafu";
+				$cookie_name = "user";
 				
 				$page = "home";
 				session_start();
-				setcookie("user", "", time() - 3600);
+				//setcookie("user", "", time() - 3600);
 				$_SESSION['loggedIn'] = false;
-				session_unset();
-				session_destroy();
-				$conn = new mysqli($server, $user, $pass, $db);
-				if ($conn->connect_error) {
-					die("Connection failed: " . $conn->connect_error);
+				if(!isset($_COOKIE[$cookie_name])) {
+					session_unset();
+					session_destroy();
+					$conn = new mysqli($server, $user, $pass, $db);
+					if ($conn->connect_error) {
+						die("Connection failed: " . $conn->connect_error);
+					}
+					$ins = "DELETE FROM cart";
+					$conn->query($ins);
+					$conn->close();
+					
 				}
-				$ins = "DELETE FROM cart";
-				$conn->query($ins);
-				$conn->close();
 				header("Location: ./login.php");
 				die();
 		?>
