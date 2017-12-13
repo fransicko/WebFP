@@ -90,7 +90,7 @@
 					// The table data.
 					echo "<td>";
 						echo '<form method="get" action="../store/delete_cart.php?pid=' . $pRow["productID"] . '">';
-						echo '<img width="150" height="150" src="../images/a6/' . $pRow["image"] . '.jpg" alt="no img" />';
+						echo '<img width="150" height="150" src="../images/' . $pRow["image"] . '" alt="no img" />';
 						echo '<span style="display: block">' . $pRow["name"] . '</span>';
 						echo '<span style="display: block">Price: $'. $tPrice .' Quantity: '. $row["count(*)"] . '</span>';
 						echo '<input type="submit" style="display:block" value="Delete from Cart">';

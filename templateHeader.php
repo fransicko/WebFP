@@ -1,6 +1,6 @@
 <header>
 
-	<h1>This is the store</h1>
+	<h1>The Dank Store</h1>
 	<nav>
 		<ul id="navbar">
 			<li><a href="welcome.php">Store</a><li>

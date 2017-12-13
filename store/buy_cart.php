@@ -14,7 +14,7 @@
 	$type = "";
 	$products = "";
 	$sql = "";
-	
+	$cookie_name = "user";
 	$id = $_COOKIE[$cookie_name];
 		  
 	$sql = $conn->prepare("SELECT productID, count(*) FROM cart WHERE customerID = ? GROUP by productID");
@@ -43,6 +43,9 @@
 		
 		$ins = "INSERT INTO orders (productID, customerID, quantity, tax, subtotal, total, time) VALUES (" . $row["productID"] . ", " . $_COOKIE[$cookie_name] . ", ". $quantity .", ". $tax .", ". $subTotal .", ". $total . ", '". $my_date. "')";
 		$conn->query($ins);
+		
+		$del = "DELETE FROM cart WHERE customerID LIKE " . $_COOKIE[$cookie_name];
+		$conn->query($del);
 	}
 	
 	
