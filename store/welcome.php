@@ -11,9 +11,6 @@
 	</head>
 	<body>
 		</header>
-		<?php 
-			include '../templateHeader.php';
-		?>
 		<?php
 				$page = "Welcome";
 				session_start();
