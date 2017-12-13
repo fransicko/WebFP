@@ -76,14 +76,14 @@
 				$res = $conn->query($sel);
 				$count = $res->fetch_assoc()["COUNT(*)"];
 				
-				session_start();
+				//session_start();
 				for ($i = 1; $i < $count + 1; $i++) {
 					if (!empty($_GET["item" . $i])) {
 						$_SESSION["productID"] = $_GET["item" . $i];
 					}
 				}
-				header("Location: ../store/add_cart.php");
-				die();
+				//header("Location: ../store/add_cart.php");
+				//die();
 			}
 			
 			// Make a table with id = items
@@ -100,7 +100,7 @@
 					// The table data.
 					echo "<td>";
 						
-						echo '<form method="get" action="' . $_SERVER["PHP_SELF"] . '">';
+						echo '<form method="GET" action="' . $_SERVER["PHP_SELF"] . '">';
 						echo '<img width="150" height="150" src="../images/a6/' . $row["image"] . '.jpg" alt="no img" />';
 						echo '<span style="display: block">' . $row["name"] . '</span>';
 						echo '<input type="submit" style="display:block" value="Add to Cart">';
